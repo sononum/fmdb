@@ -228,6 +228,10 @@
 }
 
 - (BOOL)boolForColumnIndex:(int)columnIdx {
+	// changed to allow for 't' and 'f' values in certain versions of sqlite3  -slm 01/18/2011
+	if ([[[self stringForColumnIndex:columnIdx] lowercaseString] isEqualToString:@"t"]) {
+		return YES;
+	}
     return ([self intForColumnIndex:columnIdx] != 0);
 }
 
